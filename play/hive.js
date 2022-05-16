@@ -45,16 +45,7 @@ export class Hive {
     const hiveHeight = this.size.height;
 
     for (const bee of this.bees) {
-      const { x, y, width, height } = bee.rect();
-      const [dx, dy] = bee.direction;
-      const x2 = x + width;
-      const y2 = y + height;
-      if ((y2 > hiveHeight && dy > 0) || (y < 0 && dy < 0)) {
-        bee.flipY();
-      }
-      if ((x2 > hiveWidth && dx > 0) || (x < 0 && dx < 0)) {
-        bee.flipX();
-      }
+      bee.checkBounds(hiveWidth, hiveHeight);
       bee.update(time);
     }
 

@@ -51,6 +51,19 @@ export class Bee {
     this.direction = [dx, -dy];
   }
 
+  checkBounds(hiveWidth, hiveHeight) {
+    const { x, y, width, height } = this.rect();
+    const [dx, dy] = this.direction;
+    const x2 = x + width;
+    const y2 = y + height;
+    if ((y2 > hiveHeight && dy > 0) || (y < 0 && dy < 0)) {
+      this.flipY();
+    }
+    if ((x2 > hiveWidth && dx > 0) || (x < 0 && dx < 0)) {
+      this.flipX();
+    }
+  }
+
   /**
    * @param {CanvasRenderingContext2D} ctx
    */
@@ -59,6 +72,11 @@ export class Bee {
     const { x, y } = this.offset;
     const { width, height } = this.size;
     ctx.translate(x, y);
+
+    const [dx, dy] = this.direction;
+    
+    // Rotate in direction of travel
+    ctx.rotate(Math.atan2(dy, dx) + Math.PI / 2);
 
     // Draw left and right wings as ovals
     ctx.fillStyle = "#eee";
