@@ -75,6 +75,24 @@ document.addEventListener("wheel", onWheel, {
   passive: false,
 });
 
+// Two finder pan move
+document.addEventListener("touchmove", (e) => {
+  e.preventDefault();
+  // Min 2 fingers
+  if (e.touches.length < 2) {
+    return;
+  }
+  const touch1 = e.touches[0];
+  const touch2 = e.touches[1];
+  const x1 = touch1.clientX;
+  const y1 = touch1.clientY;
+  const x2 = touch2.clientX;
+  const y2 = touch2.clientY;
+  const dx = x2 - x1;
+  const dy = y2 - y1;
+  matrix = matrix.translate(-dx, -dy);
+});
+
 resize();
 animate();
 hive.init(1);

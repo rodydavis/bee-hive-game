@@ -25,7 +25,11 @@ export class Hive {
       x: Math.random() * width,
       y: Math.random() * height,
     };
-    bee.direction = [Math.random() * 2, Math.random() * 2];
+    // Min speed is 0.5, max speed is 2.5
+    bee.direction = [
+      Math.min(Math.max(Math.random() * 2, 0.5), 2.5),
+      Math.min(Math.max(Math.random() * 2, 0.5), 2.5),
+    ];
     this.bees.push(bee);
     console.log("bees", this.bees.length);
     return bee;
