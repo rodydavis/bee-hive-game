@@ -57,6 +57,8 @@ export class Hive {
    * @param {CanvasRenderingContext2D} ctx
    */
   paint(ctx) {
+    ctx.save();
+
     // Draw hexagon grid
     const { width, height } = this.size;
 
@@ -77,5 +79,7 @@ export class Hive {
     for (const bee of this.bees) {
       bee.paint(ctx);
     }
+
+    ctx.restore();
   }
 }

@@ -1,0 +1,39 @@
+body {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: none;
+  font-family: sans-serif;
+}
+canvas {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  font-size: 18px;
+}
+h1 {
+  display: inline;
+  margin: 0;
+}
+#count {
+  font-weight: bold;
+  font-size: 22px;
+  border: 4px solid black;
+  border-radius: 10px;
+  padding: 5px 15px;
+}
