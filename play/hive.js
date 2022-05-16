@@ -1,16 +1,16 @@
 import { Bee } from "./bee.js";
-import { drawHoneycomb } from "./honeycomb.js";
+import { drawGrid, hexagonForPoint } from "./grid.js";
 
 export class Hive {
   /** @type {Bee[]} */
   bees = [];
-  size = { width: 100, height: 100 };
+  size = { width: 500, height: 500 };
   lastTime = 0;
   lastGenerate = 0;
   generateDuration = 1000 * 5 * 5;
   hexSize = 50;
 
-  init(total = 100) {
+  init(total = 0) {
     for (let i = 0; i < total; i++) this.addBee();
   }
 
@@ -66,14 +66,22 @@ export class Hive {
    * @param {CanvasRenderingContext2D} ctx
    */
   paint(ctx) {
-    // Draw Background
-    ctx.fillStyle = "yellow";
-    ctx.fillRect(0, 0, this.size.width, this.size.height);
-
     // Draw hexagon grid
     const { width, height } = this.size;
-    const size = 20;
-    drawHoneycomb(ctx, width / 9, height / 11, size, size);
+
+    const hexagons = [];
+    for (const bee of this.bees) {
+      const point = hexagonForPoint(
+        bee.offset.x,
+        bee.offset.y,
+        this.size.width,
+        this.size.height
+      );
+      if (point !== null) {
+        hexagons.push(point);
+      }
+    }
+    drawGrid(ctx, width, height, hexagons);
 
     for (const bee of this.bees) {
       bee.paint(ctx);

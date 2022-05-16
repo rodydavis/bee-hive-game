@@ -59,7 +59,6 @@ export class Bee {
     const { x, y } = this.offset;
     const { width, height } = this.size;
     ctx.translate(x, y);
-    ctx.scale(0.5, 0.5);
 
     // Draw left and right wings as ovals
     ctx.fillStyle = "#eee";
